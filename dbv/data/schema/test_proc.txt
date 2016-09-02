@@ -1,0 +1,28 @@
+DROP PROCEDURE IF EXISTS `proc_get_lab_tat1`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_lab_tat1`
+(IN filter_year INT(11), IN filter_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+                    `l`.`ID`, `l`.`name`, AVG(`ls`.`tat1`) AS `tat1`
+                FROM `lab_summary` `ls`
+                JOIN `labs` `l`
+                ON `l`.`ID` = `ls`.`lab` 
+                WHERE 1 ";
+
+        SET @QUERY = CONCAT(@QUERY, " AND `ls`.`tat1` IS NOT NULL ");
+
+        IF (filter_month != 0 && filter_month != '') THEN
+           SET @QUERY = CONCAT(@QUERY, "  AND `ls`.`year` = '",filter_year,"' AND `ls`.`month`='",filter_month,"' ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `ls`.`year` = '",filter_year,"' ");
+        END IF;
+      
+
+  SET @QUERY = CONCAT(@QUERY, " GROUP BY `l`.`ID` ");
+    SET @QUERY = CONCAT(@QUERY, " ORDER BY `l`.`ID` ");
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
