@@ -14,14 +14,8 @@ class Positivity_model extends MY_Model
 
 	function notification_bar($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		$data['year'] = $year;
 		$data['month'] = '';
@@ -36,9 +30,6 @@ class Positivity_model extends MY_Model
 			$data['month'] = ' as of '.$this->resolve_month($month);
 		}
 
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}else {
@@ -84,26 +75,8 @@ class Positivity_model extends MY_Model
 
 	function age($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		// if ($county==null || $county=='null') {
 		// 	$sql = "CALL `proc_get_eid_national_age_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -176,26 +149,8 @@ class Positivity_model extends MY_Model
 
 	function iprophylaxis($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_national_iproph_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -226,26 +181,8 @@ class Positivity_model extends MY_Model
 
 	function mprophylaxis($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_national_mproph_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -276,26 +213,8 @@ class Positivity_model extends MY_Model
 
 	function entryPoint($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_national_entryP_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -328,23 +247,8 @@ class Positivity_model extends MY_Model
 	{
 		$li = '';
 		$table = '';
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_counties_positivity_stats`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -382,26 +286,8 @@ class Positivity_model extends MY_Model
 
 	function subcounty_listings($year=null,$month=null,$county=null,$to_year=NULL,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_nat_subcounties_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		} else {
@@ -440,26 +326,8 @@ class Positivity_model extends MY_Model
 
 	function partners($year=null,$month=null,$county=null,$to_year=NULL,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_nat_partner_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		} else {
@@ -498,27 +366,8 @@ class Positivity_model extends MY_Model
 
 	function facility_listing($year=null,$month=null,$county=NULL,$to_year=NULL,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 		
 		if ($county==null || $county=='null') {
 			$sql = "CALL `proc_get_eid_sites_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -559,26 +408,8 @@ class Positivity_model extends MY_Model
 
 	function county_positivities($year=null,$month=null,$county=NULL,$to_year=NULL,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_counties_positivity_stats`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -607,23 +438,8 @@ class Positivity_model extends MY_Model
 	function county_mixed($year=null,$month=null,$to_year=NULL,$to_month=null)
 	{
 		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_counties_positivity_mixed`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();

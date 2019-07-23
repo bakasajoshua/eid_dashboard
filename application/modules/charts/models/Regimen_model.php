@@ -14,22 +14,8 @@ class Regimen_model extends MY_Model
 
 	function regimen_outcomes($year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month);
+		extract($d);
 		$sql = "CALL `proc_get_eid_iprophylaxis`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -183,25 +169,8 @@ class Regimen_model extends MY_Model
 			$modal_name = 'partnerModal';
 			$div_name = 'partnerDiv';
 		}
-		if ($regimen == null || $regimen == 'null') {
-			$regimen = $this->session->userdata('regimen_filter');
-		}
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['regimen' => $regimen, 'county' => $county, 'subcounty' => $subcounty, 'partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_iproph_breakdown`('".$regimen."','".$year."','".$month."','".$to_year."','".$to_month."','".$county."','".$subcounty."','".$partner."')";
 
@@ -240,25 +209,8 @@ class Regimen_model extends MY_Model
 
 	function get_regimen_counties($year=null,$month=null,$to_year=null,$to_month=null,$regimen=null)
 	{
-		if ($regimen == null || $regimen == 'null') {
-			$regimen = $this->session->userdata('regimen_filter');
-		}
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['regimen' => $regimen]);
+		extract($d);
 		$county = 1;
 		$zeros = 0;
 		$sql = "CALL `proc_get_eid_iproph_breakdown`('".$regimen."','".$year."','".$month."','".$to_year."','".$to_month."','".$county."','','')";

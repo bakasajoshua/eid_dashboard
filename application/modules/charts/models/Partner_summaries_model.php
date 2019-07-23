@@ -119,16 +119,8 @@ class Partner_summaries_model extends MY_Model
 
 	function tests_analysis($year=null,$month=null,$to_year=null,$to_month=null,$type=null)
 	{
-		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') $to_month = 0;
-		if ($to_year==null || $to_year=='null') $to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month);
+		extract($d);
 		if ($type==null || $type=='null') $type = 0;
 		if ($type == 0 || $type == '0') {
 			if (null !== $this->session->userdata('county_filter')) $id = $this->session->userdata('county_filter');
@@ -166,26 +158,8 @@ class Partner_summaries_model extends MY_Model
 
 	function eid_outcomes($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -298,26 +272,8 @@ class Partner_summaries_model extends MY_Model
 
 	function hei_validation($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		if ($month == 0) {
 			$sql = "CALL `proc_get_eid_partner_yearly_hei_validation`('".$partner."','".$year."')";
@@ -395,26 +351,8 @@ class Partner_summaries_model extends MY_Model
 
 	function hei_follow($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		if ($month == 0) {
 			$sql = "CALL `proc_get_eid_partner_yearly_hei`('".$partner."','".$year."')";
@@ -470,26 +408,8 @@ class Partner_summaries_model extends MY_Model
 
 	function age($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_age`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -540,26 +460,8 @@ class Partner_summaries_model extends MY_Model
 	function age2($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
 		
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_age_range`(0, '".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -589,26 +491,8 @@ class Partner_summaries_model extends MY_Model
 
 	function entry_points($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_entry_points`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -639,26 +523,8 @@ class Partner_summaries_model extends MY_Model
 
 	function mprophylaxis($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_mprophylaxis`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -689,27 +555,8 @@ class Partner_summaries_model extends MY_Model
 
 	function iprophylaxis($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_iprophylaxis`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
@@ -741,28 +588,8 @@ class Partner_summaries_model extends MY_Model
 	function partner_outcomes($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
 		//Initializing the value of the Year to the selected year or the default year which is current year
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		//Assigning the value of the month or setting it to the selected value
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-
-		
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		if ($partner) {
 			$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -814,22 +641,8 @@ class Partner_summaries_model extends MY_Model
 	function partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=null,$to_month=null)
 	{
 
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -878,22 +691,8 @@ class Partner_summaries_model extends MY_Model
 	{
 		$table = '';
 		$count = 1;
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -931,22 +730,8 @@ class Partner_summaries_model extends MY_Model
 
 	function partner_counties_download($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -985,32 +770,8 @@ class Partner_summaries_model extends MY_Model
 		$type = 0;
 		$params;
 
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
-		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county, 'partner' => $partner]);
+		extract($d);
 
 		if ($type == 0) {
 			if($to_year == 0){
@@ -1051,32 +812,8 @@ class Partner_summaries_model extends MY_Model
 		$type = 0;
 		$params;
 
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
-		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county, 'partner' => $partner]);
+		extract($d);
 
 		if ($type == 0) {
 			if($to_year == 0){
@@ -1116,32 +853,8 @@ class Partner_summaries_model extends MY_Model
 		$type = 0;
 		$params;
 
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
-		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county, 'partner' => $partner]);
+		extract($d);
 
 		if ($type == 0) {
 			if($to_year == 0){
