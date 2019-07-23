@@ -77,19 +77,11 @@ class Agencies_model extends MY_Model
 	}
 
 	function test_analysis_trends($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
-		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		$agency_id = 0;
 		
-		if ($to_month==null || $to_month=='null') $to_month = 0;
-		if ($to_year==null || $to_year=='null') $to_year = 0;
 		if ($type==null || $type=='null') $type = 4;
 		if ($type == 4 || $type == '4') {
 			if (null !== $this->session->userdata('funding_agency_filter')) $agency_id = $this->session->userdata('funding_agency_filter');
@@ -137,19 +129,11 @@ class Agencies_model extends MY_Model
 
 	function tests_analysis($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
 	{
-		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		$agency_id = 0;
 		
-		if ($to_month==null || $to_month=='null') $to_month = 0;
-		if ($to_year==null || $to_year=='null') $to_year = 0;
 		if ($type==null || $type=='null') $type = 4;
 		if ($type == 4 || $type == '4') {
 			if (null !== $this->session->userdata('funding_agency_filter')) $agency_id = $this->session->userdata('funding_agency_filter');
@@ -183,25 +167,8 @@ class Agencies_model extends MY_Model
 
 
 	function positivity($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id) {
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
-
-		if ($agency_id==null || $agency_id == 'null')
-			$agency_id = $this->session->userdata('funding_agency_filter');
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		if ($type==null || $type == 'null'){
 			$type = 0;
@@ -247,25 +214,8 @@ class Agencies_model extends MY_Model
 	}
 
 	public function outcomes($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
-		if ($agency_id==null || $agency_id == 'null')
-			$agency_id = $this->session->userdata('funding_agency_filter');
-
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		if ($type==null || $type == 'null')
 			$type = 0;
@@ -377,25 +327,8 @@ class Agencies_model extends MY_Model
 	}
 
 	function hei_validation($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
-		if ($agency_id==null || $agency_id == 'null')
-			$agency_id = $this->session->userdata('funding_agency_filter');
-
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		if ($type==null || $type == 'null')
 			$type = 0;
@@ -456,25 +389,8 @@ class Agencies_model extends MY_Model
 	}
 
 	function hei_follow($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
-		if ($agency_id==null || $agency_id == 'null')
-			$agency_id = $this->session->userdata('funding_agency_filter');
-
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		if ($type==null || $type == 'null')
 			$type = 0;
@@ -527,25 +443,8 @@ class Agencies_model extends MY_Model
 	}
 
 	function age2($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
-		if ($agency_id==null || $agency_id == 'null')
-			$agency_id = $this->session->userdata('funding_agency_filter');
-
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['agency_id' => $agency_id]);
+		extract($d);
 
 		if ($type==null || $type == 'null')
 			$type = 0;
