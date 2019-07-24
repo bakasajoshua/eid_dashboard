@@ -60,7 +60,6 @@ class Age_model extends MY_Model
 	{
 		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county, 'subcounty' => $subcounty]);
 		extract($d);
-		}
 		// echo "County: ".$county." and sub-county:".$subcounty;die();
 		if ($county) {
 			$sql = "CALL `proc_get_eid_age_data`(1, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
