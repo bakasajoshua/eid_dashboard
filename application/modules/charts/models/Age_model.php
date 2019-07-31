@@ -58,28 +58,8 @@ class Age_model extends MY_Model
 
 	function get_breakdown_data($year=null,$month=null,$to_year=null,$to_month=null,$county=null,$subcounty=null)
 	{
-		if ($county == null || $county == 'null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		if ($subcounty == null || $subcounty == 'null') {
-			$subcounty = $this->session->userdata('sub_county_filter');
-		}
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county, 'subcounty' => $subcounty]);
+		extract($d);
 		// echo "County: ".$county." and sub-county:".$subcounty;die();
 		if ($county) {
 			$sql = "CALL `proc_get_eid_age_data`(1, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
@@ -209,25 +189,8 @@ class Age_model extends MY_Model
 			$div_name = 'partnerDiv';
 			$type = 3;
 		}
-		if ($age == null || $age == 'null') {
-			$age = $this->session->userdata('age_filter');
-		}
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['age' => $age, 'county' => $county, 'subcounty' => $subcounty, 'partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_age_data_listing`('{$type}', '{$age}', '".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -267,25 +230,8 @@ class Age_model extends MY_Model
 
 	function get_counties_agebreakdown($year=null,$month=null,$to_year=null,$to_month=null,$age=null)
 	{
-		if ($age == null || $age == 'null') {
-			$age = $this->session->userdata('age_filter');
-		}
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['age' => $age]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_age_data_listing`(1, '{$age}', '".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();

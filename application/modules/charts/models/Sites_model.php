@@ -14,23 +14,8 @@ class Sites_model extends MY_Model
 
 
 	function sites_outcomes($year=null,$month=null,$to_year=null,$to_month=null){
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo $sql;die();
@@ -156,22 +141,8 @@ class Sites_model extends MY_Model
 	{
 		$table = '';
 		$count = 1;
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site, 'partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -214,22 +185,8 @@ class Sites_model extends MY_Model
 
 	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL,$to_year=null,$to_month=null)
 	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['partner' => $partner]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -408,28 +365,12 @@ class Sites_model extends MY_Model
 
 	function get_eid($site=null, $year=null, $month=null,$to_year=null, $to_month=null){
 
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
 		$data['title'] = "EID Outcome (" . $year . ", " . $this->resolve_month($month) . ")";
 	
 		
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
-
-		if ($month==null || $month=='null') {
-			$data['title'] = "EID Outcome (" . $year . ")";
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}else {
@@ -559,16 +500,10 @@ class Sites_model extends MY_Model
 
 	function get_hei_validation($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
 		$data['title'] = "Actual Infants Tested Positive Validation at Site Outcomes (" . $year . ", " . $this->resolve_month($month) . ")";
-	
-		
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
 
 		if ($month==null || $month=='null') {
 			$data['title'] = "Actual Infants Tested Positive Validation at Site Outcomes (" . $year . ")";
@@ -578,9 +513,7 @@ class Sites_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}else {
@@ -663,15 +596,11 @@ class Sites_model extends MY_Model
 	function get_hei($site=null, $year=null, $month=null,$to_year=null,$to_month=null){
 
 
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
 		$data['title'] = "Status of Actual Confirmed Positives at Site (" . $year . ", " . $this->resolve_month($month) . ")";
 
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
 
 		if ($month==null || $month=='null') {
 			$data['title'] = "Status of Actual Confirmed Positives at Site (" . $year . ")";
@@ -682,12 +611,7 @@ class Sites_model extends MY_Model
 			}
 		}
 
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		
 		// proc_get_eid_sites_hei_follow_up
 		
 		if ($month == 0) {
@@ -755,30 +679,9 @@ class Sites_model extends MY_Model
 	{
 		$type = 0;
 
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-
 		if ($type == 0) {
 			if($to_year == 0){
 				$type = 3;
@@ -808,29 +711,8 @@ class Sites_model extends MY_Model
 	{
 		$type = 0;
 
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
-		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 
 		if ($type == 0) {
 			if($to_year == 0){
@@ -862,29 +744,8 @@ class Sites_model extends MY_Model
 	{
 		$type = 0;
 
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-				$type = 1;
-			}else {
-				$month = $this->session->userdata('filter_month');
-				$type = 3;
-			}
-		}
-		
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 
 		if ($type == 0) {
 			if($to_year == 0){
@@ -915,25 +776,8 @@ class Sites_model extends MY_Model
 	}
 
 	public function age_breakdown($site=null,$year=null,$month=null,$to_year=null,$to_month=null) {
-		if ($site==null || $site=='null') 
-			$site = $this->session->userdata('site_filter');
-		
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-
-		if ($to_year==null || $to_year=='null')
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_site_age_range`(0, '".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		$result = $this->db->query($sql)->result_array();
@@ -958,25 +802,8 @@ class Sites_model extends MY_Model
 
 	function entry_points($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($site==null || $site=='null') 
-			$site = $this->session->userdata('site_filter');
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_site_entry_points`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -1003,24 +830,8 @@ class Sites_model extends MY_Model
 
 	function mprophylaxis($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($site==null || $site=='null') 
-			$site = $this->session->userdata('site_filter');
-		
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
 		$sql = "CALL `proc_get_eid_site_mprophylaxis`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -1047,25 +858,8 @@ class Sites_model extends MY_Model
 
 	function iprophylaxis($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($site==null || $site=='null') {
-			$site = $this->session->userdata('site_filter');
-		}
-
-		if ($year==null || $year=='null') 
-			$year = $this->session->userdata('filter_year');
-		
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') 
-			$to_month = 0;
-		
-		if ($to_year==null || $to_year=='null') 
-			$to_year = 0;
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['site' => $site]);
+		extract($d);
 		
 		$sql = "CALL `proc_get_eid_site_iprophylaxis`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();

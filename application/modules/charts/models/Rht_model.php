@@ -135,26 +135,8 @@ class Rht_model extends MY_Model
 
 	function get_outcomes($county=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 		$sql = "CALL `proc_get_eid_rht_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."','1','')";
 		$sql2 = "CALL `proc_get_eid_rht_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."','2','')";
@@ -230,26 +212,8 @@ class Rht_model extends MY_Model
 
 	function get_gender($county=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
 
 
 		// Queries to get negatives
@@ -426,27 +390,9 @@ class Rht_model extends MY_Model
 
 	function get_facilities($county=null,$year=null,$month=null,$to_year=null,$to_month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-
+		$d = $this->extract_variables($year, $month, $to_year, $to_month, ['county' => $county]);
+		extract($d);
+		
 		$sql = "CALL `proc_get_eid_rht_facility_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."','1')";
 		$sql2 = "CALL `proc_get_eid_rht_facility_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."','2')";
 
