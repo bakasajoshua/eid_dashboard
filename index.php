@@ -99,7 +99,7 @@ switch (ENVIRONMENT)
  * as this file.
  */
 
-	$system_path = '/var/www/eid_dir/eid_dashboard/system';
+	$system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -115,7 +115,7 @@ switch (ENVIRONMENT)
  * NO TRAILING SLASH!
  */
 
-	$application_folder = '/var/www/eid_dir/eid_dashboard/application';
+	$application_folder = 'application';
 
 /*
  *---------------------------------------------------------------
