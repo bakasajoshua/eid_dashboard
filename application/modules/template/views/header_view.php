@@ -128,7 +128,6 @@
 								<li><a href="<?php echo base_url();?>summary/heivalidation">HEI Validation Summary</a></li>
 							</ul>
 						</li>
-						<li><a href="<?php echo base_url();?>trends">Trends</a></li>
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">County/Sub-County
 							<b class="caret"></b></a>
@@ -137,6 +136,15 @@
 								<li><a href="<?php echo base_url();?>county/tat">County TAT</a></li>
 								<li><a href="<?php echo base_url();?>county/subCounty">Sub-County</a></li>
 								<li><a href="<?php echo base_url();?>county/subCountytat">Sub-County TAT</a></li>
+							</ul>
+						</li>
+						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Labs
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
+								<li><a href="<?php echo base_url();?>labPerformance/poc">POC</a></li>
 							</ul>
 						</li>
 						<!-- <li><a href="<?php echo base_url();?>age">Age</a></li> -->
@@ -153,17 +161,8 @@
 								<li><a href="<?php echo base_url();?>partner/agencies">Funding Agencies</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Labs
-							<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
-								<li><a href="<?php echo base_url();?>labPerformance/poc">POC</a></li>
-							</ul>
-						</li>
 						
 						<!-- <li><a href="<?php echo base_url();?>rht">RHT Testing</a></li> -->
-						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Positivity
 							<b class="caret"></b></a>
@@ -173,16 +172,17 @@
 								<li><a href="<?php echo base_url();?>regimen">Regimen Analysis</a></li>
 							</ul>
 						</li>
-						<li><a href="<?php echo base_url();?>assets/downloads/EID_LAB_REQUISITION_FORM.pdf">EID Request Form</a></li>
+						<li><a href="<?php echo base_url();?>trends">Trends</a></li>
+						<li><a href="https://nascop.org">Resources</a></li>
+						<li><a href="https://viralload.nascop.org">VL View</a></li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="https://eiddash.nascop.org/">Login</a></li>
-						<li><a href="https://viralload.nascop.org">VL View</a></li>
 						<!-- <li><a href="<?php echo base_url();?>county">County View</a></li>
 						<li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
 						<li><a href="http://eid.nascop.org/login.php">Login</a></li>
 						<li><a href="http://eid.nascop.org">EID View</a></li> -->
 						<!-- <li><a href="javascript:void(0)">Link</a></li> -->
-						<li class="dropdown">
+						<!-- <li class="dropdown"> -->
 							<!-- <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
 							<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -192,7 +192,7 @@
 								<li class="divider"></li>
 								<li><a href="javascript:void(0)">Separated link</a></li>
 							</ul> -->
-						</li>
+						<!-- </li> -->
 					</ul>
 				</div>
 			</div>
