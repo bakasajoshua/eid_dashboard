@@ -7,7 +7,7 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-# .htaccess
+.htaccess
 application/config/database.php
 
 user_guide_src/build/*
