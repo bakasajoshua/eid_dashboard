@@ -100,7 +100,7 @@ $db['default'] = array(
 
 $db['eid_survey'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
+	'hostname' => 'mysql',
 	'username' => 'root',
 	// 'password' => 'FnP5FjbnMrzXCm.',
 	'password' => '',
@@ -121,4 +121,3 @@ $db['eid_survey'] = array(
 	'save_queries' => TRUE,
 	'port' => 3307
 );
-
