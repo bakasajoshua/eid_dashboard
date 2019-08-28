@@ -53,7 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
  *---------------------------------------------------------------
@@ -99,7 +99,7 @@ switch (ENVIRONMENT)
  * as this file.
  */
 	// $system_path = 'system';
-	$system_path = '/var/www/eid_dir/eid_dashboard/system';
+	$system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -115,7 +115,7 @@ switch (ENVIRONMENT)
  * NO TRAILING SLASH!
  */
 	// $application_folder = 'application';
-	$application_folder = '/var/www/eid_dir/eid_dashboard/application';
+	$application_folder = 'application';
 
 /*
  *---------------------------------------------------------------
