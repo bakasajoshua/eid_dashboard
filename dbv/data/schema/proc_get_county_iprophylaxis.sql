@@ -9,7 +9,8 @@ BEGIN
 						SUM(`neg`) AS `negative` 
 					FROM `county_iprophylaxis` `nip` 
 					JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
+                WHERE 1
+                WHERE `p`.`flag` = 1";
 
     IF (filter_month != 0 && filter_month != '') THEN
        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nip`.`year` = '",filter_year,"' AND `nip`.`month`='",filter_month,"' ");
