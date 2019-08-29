@@ -32,3 +32,5 @@ sessions/*
 *.sublime-workspace
 *.sublime-project
 application/config/config\.php
+
+index.php

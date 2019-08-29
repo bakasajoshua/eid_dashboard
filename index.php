@@ -53,7 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 /*
  *---------------------------------------------------------------
@@ -118,7 +118,6 @@ switch (ENVIRONMENT)
 	// $application_folder = 'application';
 	$application_folder = 'application';
 
-	$application_folder = '/var/www/eid_dir/eid_dashboard/application';
 
 /*
  *---------------------------------------------------------------
