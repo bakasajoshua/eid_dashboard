@@ -136,3 +136,6 @@
 });
 
 </script>
+<div class="row">
+    TAT calculation is based on working days excluding weekends and public holidays
+</div>

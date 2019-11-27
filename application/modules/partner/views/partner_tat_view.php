@@ -1,5 +1,8 @@
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
+		TAT calculation is based on working days excluding weekends and public holidays
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading" id="heading">
 		  	Partner TAT Outcomes <div class="display_date"></div>

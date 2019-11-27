@@ -9,6 +9,7 @@ application/logs/*
 !application/logs/.htaccess
 .htaccess
 application/config/database.php
+application/config/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -17,6 +18,10 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 assets/uploads/*
 sessions/*
+<<<<<<<<< Temporary merge branch 1
+=========
+# application/config/
+>>>>>>>>> Temporary merge branch 2
 
 # IDE Files
 #-------------------------
@@ -30,5 +35,7 @@ sessions/*
 *.sublime-workspace
 *.sublime-project
 application/config/config\.php
+
+index.php
 
 application/config/
